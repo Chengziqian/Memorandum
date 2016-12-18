@@ -66,7 +66,7 @@ $things_done = $sql->fetchall(PDO::FETCH_ASSOC);
                             <input class="form-control" type="text" name="newThing">
                         </td>
                         <td>
-                            <a href="edit.html"><input type="submit" class="btn btn-success" value="ADD" name="action"></a>
+                            <input type="submit" class="btn btn-success" value="ADD" name="action">
                         </td>
                     </tr>
                     <?php foreach ($things_undo as $thing) { ?>

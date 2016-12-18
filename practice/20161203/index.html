@@ -1,0 +1,104 @@
+<!DOCTYPE html> <!-- 声明 HTML5 -->
+<html>
+    <head> <!-- 申明 -->
+        <meta charset="utf-8"> <!-- 编码！！！important -->
+        <title>测试</title>
+        <style>
+            /*div {
+                color: #FF0000;
+            }*/
+            .turnRed {
+                color: #FF0000;
+            }
+            .blue {
+                color: blue;
+            }
+            .turnRed .blue {
+                color: black;
+            }
+            /*div * {
+                color: #FF0000 !important;
+            }*/
+
+            .A .C {
+                color: purple;
+            }
+            .A > .C {
+                color: gray;
+            }
+        </style>
+    </head>
+
+    <body> <!-- 内容 -->
+
+        <div class="A">A
+            <div class="B">B</div>
+            <div class="B"><div class="C">C</div></div>
+            <div class="C">C</div>
+        </div>
+
+        <div class="turnRed"> division
+            <p>paragraph<br>"\n"paragraph</p>
+            <p>par<span class="blue">agr</span>aph<br>"\n"paragraph</p>
+            aa
+        </div>
+        <hr>
+        <div> divi<span class="blue">si</span>on
+            <p>paragraph<br>"\n"paragraph</p>
+            <p>paragraph<br>"\n"paragraph</p>
+        </div>
+
+        <!-- link -->
+        <a href="baidu.com">Link to baidu1</a> 
+        <a href="http://baidu.com">Link to baidu2</a> 
+        <a href="//baidu.com">Link to baidu3</a> 
+        <a href="http://baidu.com"  target="_blank">Link to baidu4</a>
+        <a href="http://baidu.com"  target="baidu">Link to baidu5</a>
+        <a href="http://google.com" target="baidu">Link to baidu6</a>
+
+        <!-- . 当前目录 -->
+        <!-- .. 上一级 -->
+        <img src="../a/pic.png"> <!-- src=source -->
+
+
+        <div class="turnRed">
+            <ul> <!-- unordered list -->
+                <li>first</li> <!-- list item -->
+                <li>Second</li>
+            </ul>
+        </div>
+
+        <ol> <!-- ordered list -->
+            <li>first</li>
+            <li>Second</li>
+        </ol>
+
+        <table border="1"> <!-- 表格 -->
+            <tr> <!-- 行 -->
+                <td>A</td> <!-- 单元格 -->
+                <td>B</td>
+            </tr>
+            <tr>
+                <td>a1</td>
+                <td>b1</td>
+            </tr>
+            <tr>
+                <td>a2</td>
+                <td>b2</td>
+            </tr>
+        </table>
+
+        <button>this is a button</button>
+        
+        <input type="text">
+        <input type="email">
+        <input type="number">
+        <input type="password">
+        <input type="date">
+        <input type="color">
+
+        <textarea></textarea>
+
+
+    </body>
+</html>
