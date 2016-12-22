@@ -15,14 +15,15 @@ catch (Exception $e){
 if (isset($_POST['action'])){
     if (substr($_POST['action'],0,3)==='DEL'){
         $id = substr($_POST['action'],4);
-        $sql = $pdo->prepare('DELETE FROM things WHERE `id` = :id;');
+        $sql = $pdo->prepare('UPDATE things SET `del`= 1,`del_time`=:del_time  WHERE `id` = :id;');
         $sql->bindValue(':id',$id);
+        $sql->bindValue(':del_time',date('Y-m-d H:i:s',time()));
         $sql->execute();
     }
     else if (substr($_POST['action'],0,4)==='DONE'){
         $id = substr($_POST['action'],5);
         $sql = $pdo->prepare('UPDATE things SET `done_time` = :done_time WHERE `id`=:id;');
-        $sql->bindValue(':done_time',date('Y-m-d H:m:s',time()));
+        $sql->bindValue(':done_time',date('Y-m-d H:i:s',time()));
         $sql->bindValue(':id',$id);
         $sql->execute();
     }
@@ -35,11 +36,11 @@ if (isset($_POST['action'])){
         header('Location:edit.php?id='.$id_1);
     }
 }
-$sql = $pdo->prepare('SELECT * FROM things WHERE `done_time` is NULL;');
+$sql = $pdo->prepare('SELECT * FROM things WHERE `done_time`is NULL and `del` is NULL;');
 $sql->execute();
 $things_undo = $sql->fetchall(PDO::FETCH_ASSOC);
 
-$sql = $pdo->prepare('SELECT * FROM things WHERE `done_time` is not NULL;');
+$sql = $pdo->prepare('SELECT * FROM things WHERE `done_time` is not NULL and `del` is NULL;');
 $sql->execute();
 $things_done = $sql->fetchall(PDO::FETCH_ASSOC);
 ?>
@@ -119,5 +120,6 @@ $things_done = $sql->fetchall(PDO::FETCH_ASSOC);
             </tr>-->
         </table>
         </form>
+        </div>
     </body>
     </html>

@@ -14,10 +14,11 @@ catch(Exception $e) {
 }
 if (isset($_POST['action'])){
     if ($_POST['action']==='SAVE'){
-        $sql=$pdo->prepare('UPDATE things SET `title`=:title,`outline`=:outline,`description`=:description WHERE `id`=:id;');
+        $sql=$pdo->prepare('UPDATE things SET `title`=:title,`outline`=:outline,`description`=:description ,`edit_time`=:edit_time WHERE `id`=:id;');
         $sql->bindValue(':title',urlencode($_POST['newthing_title']));
         $sql->bindValue(':outline',urlencode($_POST['newthing_outline']));
         $sql->bindValue(':description',urlencode($_POST['newthing_desc']));
+        $sql->bindValue('edit_time',date('Y-m-d H:i:s',time()));
         $sql->bindValue(':id',$_GET['id']);
         $sql->execute();
         header('Location:list.php');

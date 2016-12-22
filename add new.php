@@ -13,9 +13,9 @@ catch (Exception $e){
     return;    
 }
 if (isset($_POST['action'])){
-    if($_POST['action']==='add'){
+    if($_POST['action']==='add'&&$_POST['newthing_title']!=''){
     $sql=$pdo->prepare('INSERT INTO things(`create_time`,`title`,`outline`,`description`) VALUES (:create_time,:title,:outline,:description);');
-    $sql->bindValue(':create_time',date('Y-m-d H:m:s',time()));
+    $sql->bindValue(':create_time',date('Y-m-d H:i:s',time()));
     $sql->bindValue(':title',urlencode($_POST['newthing_title']));
     $sql->bindValue(':outline',urlencode($_POST['newthing_outline']));
     $sql->bindValue(':description',urlencode($_POST['newthing_desc']));
@@ -33,6 +33,12 @@ if (isset($_POST['action'])){
         <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="http://www.bootcss.com/p/buttons/css/buttons.css">
         <link rel="stylesheet" href="global.css">
+        <style>
+            input.title::input-placeholder{color:<?php if (isset($_POST['action']) && $_POST['action']==='add'&& $_POST['newthing_title']==='') echo 'red' ?>;}
+            input.title::-moz-placeholder { color: <?php if (isset($_POST['action']) && $_POST['action']==='add'&& $_POST['newthing_title']==='') echo 'red'?>; }
+            input.title::-webkit-input-placeholder { color:<?php if (isset($_POST['action']) && $_POST['action']==='add'&& $_POST['newthing_title']==='') echo 'red'?>; }
+            in put.title:-ms-input-placeholder { color:<?php if (isset($_POST['action']) && $_POST['action']==='add'&& $_POST['newthing_title']==='') echo 'red'?>; }
+        </style>
     </head>
     <body >
         <div id="body1">
@@ -51,7 +57,7 @@ if (isset($_POST['action'])){
         <form action="add new.php" method="post">
         <div style="white-space: nowrap;width:100%;">
             <div style="background-color:rgba(101,250,90,0.2);float:left;width:30%;height:60px;"><div style="position:relative;top:20%;font-size:180%">请输入事件名称</div></div>
-            <div style="float:left;width:70%;height:60px;margin:0;"><input type="text" name="newthing_title" placeholder="事件名称" style="width:100%;height:100%;font-size:180%;"></div>
+            <div style="float:left;width:70%;height:60px;margin:0;"><input type="text" class="title" name="newthing_title" placeholder="<?php if (isset($_POST['action']) && $_POST['action']==='add'&& $_POST['newthing_title']==='') echo '标题不能为空'; else echo 请输入事件名称; ?>" style="width:100%;height:100%;font-size:180%;"></div>
         </div>
         <div style="white-space: nowrap;width:100%;">
             <div style="background-color:rgba(0,43,163,0.2);float:left;width:30%;height:60px;"><div style="position:relative;top:20%;font-size:180%">请输入事件概要</div></div>
